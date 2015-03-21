@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<script src="./jquery.js"></script>
+		<script src="./getParameter.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("#video_boton").click(function(event){
+					event.preventDefault();		// Detiene el form y no ejecuta el action
+					
+					direccion = $("#url_video").val();
+					videoParam = getUrlParameter(direccion, 'v');		// Extraemos el contenido del parametro V que es la id del video en YT
+					
+					$("#res").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+videoParam+'" frameborder="0" allowfullscreen></iframe>');	// Muestra del video
+					
+					console.log($("#res").html());
+				});
+			});
+			
+			// Pequeña funcion para mostrar el form y ahorrar espacio
+			function mostrarYTForm(){
+				$("#SHOW_YT_FORM").css('display','none');
+				$("#YT_FORM").css('display','inline');
+			}
+		</script>
+	</head>
+
+	<body>
+		<button id="SHOW_YT_FORM" type="button" onclick="mostrarYTForm()">YouTube Video</button>
+		<form style="display:none;" id="YT_FORM" name="yt_form" target="post" action="#">
+			<input type="text" id="url_video" name="url_video">
+			<input type="button" id="video_boton" name="url_video" value="Enviar">
+		</form>
+		
+		<div id="res"></div>
+	</body>
+</html>
